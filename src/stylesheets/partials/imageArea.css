@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box; }
+
+body {
+  margin: 0px; }
+
+#topBar {
+  background-color: cadetblue;
+  color: white;
+  position: relative;
+  height: 40px;
+  padding: 10px;
+  z-index: 3; }
+
+.centered, #dragDrop, #dispImg {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  top: 50%;
+  bottom: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
+
+#dragDrop {
+  background-color: bisque;
+  width: 200px;
+  height: 200px; }
+
+#actionButton {
+  background-color: darkseagreen;
+  color: white;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+  border-radius: 50%;
+  font-family: "Courier New";
+  font-size: 35pt; }
+
+#addSign {
+  position: absolute;
+  left: 16px;
+  top: 3px; }
+
+/*# sourceMappingURL=imageArea.css.map */
