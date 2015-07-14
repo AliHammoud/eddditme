@@ -1,86 +1,138 @@
 $barHeight: 40px;
+$dropBoxSize: 200px;
+
+@mixin translate-mixin($xVal, $yVal) {
+
+  -ms-transform: translate($xVal, $yVal);
+  -webkit-transform: translate($xVal, $yVal);
+  -moz-transform: translate($xVal, $yVal);
+  transform: translate($xVal, $yVal);
+
+}
 
 * {
-  
+
   box-sizing: border-box;
-  
+
 }
 
 body {
-  
+
   margin:  0px;
+  overflow: hidden;
+
+}
+
+.container {
   
+  overflow: hidden
+  
+}
+
+#imgInput {
+
+  width:  $dropBoxSize;
+  height: $dropBoxSize;
+
+  visibility: hidden;
+
 }
 
 #topBar {
-  
+
   background-color: cadetblue;
   color: white;
-  
+
   position: relative;
   height:  $barHeight;
   padding: 10px;
-  
+
   z-index: 3;
-  
+
 }
 
 .centered {
-  
+
   position: absolute;
-  
+
   left:    50%;
   right:   50%;
   top:     50%;
   bottom:  50%;
 
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  
+  @include translate-mixin(-50%, -50%);
+
 }
 
 #dragDrop {
 
   @extend .centered;
-  
+
   background-color: bisque;
-  
+
   width:   200px;
   height:  200px;
-  
+
+  border-radius: 30px;
+
+  cursor: pointer;
+
+  //overflow: hidden;
+
+}
+
+#dragDrop p {
+
+  text-align: center;
+  margin: 0px;
+
+  margin-top: 50%;
+
+  @include translate-mixin(0%, -50%);
+
+  font-family: "Lucida Console", Monaco, monospace;
+  color: white;
+  font-size: 11pt;
+
+}
+
+#dragDrop p span {
+
+  font-weight: bold;
+  font-size: 18pt;
+
 }
 
 #dispImg {
-  
+
   @extend .centered;
-  
+
 }
 
 #actionButton {
 
   background-color: darkseagreen;
   color: white;
-  
+
   width:         60px;
   height:        60px;
-  
+
   position: absolute;
-  
+
   right:         50px;
   bottom:        50px;
-  
+
   border-radius: 50%;
-  
+
   font-family: "Courier New";
   font-size:     35pt;
 
 }
 
 #addSign {
+  
   position: absolute;
   left: 16px;
   top: 3px;
-  
+
 }

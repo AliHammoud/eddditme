@@ -2,7 +2,16 @@
   box-sizing: border-box; }
 
 body {
-  margin: 0px; }
+  margin: 0px;
+  overflow: hidden; }
+
+.container {
+  overflow: hidden; }
+
+#imgInput {
+  width: 200px;
+  height: 200px;
+  visibility: hidden; }
 
 #topBar {
   background-color: cadetblue;
@@ -26,7 +35,25 @@ body {
 #dragDrop {
   background-color: bisque;
   width: 200px;
-  height: 200px; }
+  height: 200px;
+  border-radius: 30px;
+  cursor: pointer; }
+
+#dragDrop p {
+  text-align: center;
+  margin: 0px;
+  margin-top: 50%;
+  -ms-transform: translate(0%, -50%);
+  -webkit-transform: translate(0%, -50%);
+  -moz-transform: translate(0%, -50%);
+  transform: translate(0%, -50%);
+  font-family: "Lucida Console", Monaco, monospace;
+  color: white;
+  font-size: 11pt; }
+
+#dragDrop p span {
+  font-weight: bold;
+  font-size: 18pt; }
 
 #actionButton {
   background-color: darkseagreen;
