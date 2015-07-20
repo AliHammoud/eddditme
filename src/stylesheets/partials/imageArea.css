@@ -3,7 +3,11 @@
 
 body {
   margin: 0px;
-  overflow: hidden; }
+  overflow: hidden;
+  background-color: #494444; }
+
+canvas {
+  z-index: 100000; }
 
 .container {
   overflow: hidden; }
@@ -14,11 +18,14 @@ body {
   visibility: hidden; }
 
 #topBar {
-  background-color: cadetblue;
+  background-color: #555555;
   color: white;
   position: relative;
   height: 40px;
   padding: 10px;
+  -webkit-box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.05);
   z-index: 3; }
 
 .centered, #dragDrop, #dispImg {
@@ -33,11 +40,14 @@ body {
   transform: translate(-50%, -50%); }
 
 #dragDrop {
-  background-color: bisque;
+  background-color: #555;
   width: 200px;
   height: 200px;
   border-radius: 30px;
-  cursor: pointer; }
+  cursor: pointer;
+  -webkit-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05); }
 
 #dragDrop p {
   text-align: center;
@@ -55,8 +65,11 @@ body {
   font-weight: bold;
   font-size: 18pt; }
 
+#dispImg {
+  visibility: hidden; }
+
 #actionButton {
-  background-color: darkseagreen;
+  background-color: #555555;
   color: white;
   width: 60px;
   height: 60px;
@@ -65,7 +78,20 @@ body {
   bottom: 50px;
   border-radius: 50%;
   font-family: "Courier New";
-  font-size: 35pt; }
+  font-size: 35pt;
+  cursor: pointer;
+  -webkit-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05); }
+
+#actionButton i {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
 
 #addSign {
   position: absolute;

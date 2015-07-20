@@ -133,7 +133,6 @@ $(document).ready(function () {
     
     if (img.width === winWidth && img.height > winHeight) {
       
-      console.log("same width, scale height");
       fitHeight(selector, aspect, winHeight);
       
     }
@@ -159,20 +158,38 @@ $(document).ready(function () {
 
     } catch (e) {
       
-      //console.warn("img not set yet");
       console.warn(e);
       
     }
 
   }
   
-  function readImageFile(file) {
+  function setupImg() {
 
+    $('#dispImg')
+      .attr('src', img.src)
+      .attr('width', img.width)
+      .attr('height', img.height)
+      .css({visibility: 'visible'});
+
+    fitElement('#dispImg');
+
+    var viewport = new ImageProcessor(img);
+    viewport.initProcessor();
+    viewport.loadShader('#fragmentShader_0');
+
+    $('canvas').addClass('centered').css({opacity: 0.5});
+    $('#dragDrop').css({visibility: 'hidden'});
+
+  }
+  
+  function readImageFile(file) {
+    
     var
       reader = new FileReader(),
       fileSizeRaw = file.size,
       fileSizeMB,
-      imageType = /image/;
+      imageType = 'image';
 
     fileSizeMB = fileSizeRaw / (1024 * 1024);
 
@@ -184,25 +201,8 @@ $(document).ready(function () {
 
         img = new Image();
         img.src = reader.result;
-
-        $('#dispImg')
-          .attr('width', img.width)
-          .attr('height', img.height)
-          .attr('src', img.src);
         
-        try {
-          
-          sessionStorage.setItem('editImg', img.src);
-          console.log("Image uploaded. Size: " +
-                      fileSizeMB.toPrecision(2) + " MB");
-          
-        } catch (exception) {
-
-          console.warn("Quota exceeded");
-
-        }
-
-        fitElement('#dispImg');
+        setupImg();
 
       };
 

@@ -3,13 +3,54 @@
 <html>
   <head>
     <link rel="stylesheet" href="stylesheets/main.css">
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/three.min.js"></script>
     <script src="scripts/main.js"></script>
+    <script src="scripts/ImageProcessor.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
   </head>
 
 
   <body>
+    
+    <!-- Shaders -->
+    <script id="vertexShader" 
+            type="x-shader/x-vertex" >
+
+    varying vec2 vUv;
+
+    void main(){
+      vUv = uv;
+      gl_Position = projectionMatrix * 
+                    modelViewMatrix * 
+                    vec4(position, 1.0);
+
+    }
+
+    </script>
+
+    <script name="no_effect"
+            id="fragmentShader_0"
+            type="x-shader/x-fragment" >
+
+    varying vec2 vUv;
+
+    uniform sampler2D editImg;
+
+    void main(){
+      vec4 myTexture = texture2D(editImg, vUv);
+      gl_FragColor = vec4 (myTexture.r, 
+                           myTexture.g, 
+                           myTexture.b, 
+                           1.0);
+
+    }
+
+    </script>
+    
     <div id="topBar">edddit.me</div>
     <div class="container">
       <div id="dragDrop">
@@ -22,9 +63,9 @@
       <input type="file" id="imgInput">
     </div>
     <div id="actionButton">
-      <div id="addSign">
-        +
-      </div>
+      <i class="material-icons md-48">
+        edit
+      </i>
     </div>
   </body>
 
