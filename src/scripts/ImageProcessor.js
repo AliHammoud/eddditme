@@ -2,6 +2,8 @@
 unparam: false, sloppy: true,  vars: true, white: false, indent: 2,
 maxlen: 80*/
 
+/*global $, THREE */
+
 var ImageProcessor = function (uploadedImg) {
   
   var
@@ -61,9 +63,14 @@ var ImageProcessor = function (uploadedImg) {
       function () { flush('Async texture loaded'); }
     );
     
-    //check if poweroftwo
+    if (!isPowerOfTwo(IMAGE.height) && !isPowerOfTwo(IMAGE.width)) {
+      
+      TEXTURE.minFilter = THREE.LinearFilter;
+      TEXTURE.magFilter = THREE.LinearMipMapLinearFilter;
+      
+    }
 
-    UNIFS = {editImg: {type: 't', value: TEXTURE}};
+    UNIFS   = {editImg: {type: 't', value: TEXTURE}};
     VSHADER = $('#vertexShader').html();
     FSHADER = $(fshaderID).html();
     
@@ -86,16 +93,26 @@ var ImageProcessor = function (uploadedImg) {
     
   }
   
+  function removeImagePlane() {
+    
+    var existingPlane = SCENE.getObjectByName(OBJNAME);
+    SCENE.remove(existingPlane);
+    flush("removed image plane");
+    
+  }
+  
   ImageProcessor.prototype.initProcessor = function () {
     
-    SCENE = new THREE.Scene();
-    CAMERA = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);
-    RENDERER = new THREE.WebGLRenderer();
+    SCENE     = new THREE.Scene();
+    CAMERA    = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);
+    RENDERER  = new THREE.WebGLRenderer({ antialias: true });
     
     RENDERER.setSize(IMAGE.width, IMAGE.height);
     
     if (DEBUGIMG) {
+      
       document.body.appendChild(RENDERER.domElement);
+      
     }
     
     CAMERA.position.z = 1;
@@ -110,13 +127,22 @@ var ImageProcessor = function (uploadedImg) {
       
     } else {
       
-      var existingPlane = SCENE.getChildByName(OBJNAME);
+      removeImagePlane();
+      createImgPlane(shaderID);
       
     }
     
   };
   
   ImageProcessor.prototype.updateEffect = function () {
+    
+  };
+  
+  ImageProcessor.prototype.resizeCanvas = function (w, h) {
+    
+    //console.log(w + ' ' + h);
+    RENDERER.setSize(w, h);
+    flush('viepowrt resize');
     
   };
   

@@ -1,32 +1,5 @@
-* {
-  box-sizing: border-box; }
-
-body {
-  margin: 0px;
-  overflow: hidden;
-  background-color: #494444; }
-
-canvas {
-  z-index: 100000; }
-
 .container {
   overflow: hidden; }
-
-#imgInput {
-  width: 200px;
-  height: 200px;
-  visibility: hidden; }
-
-#topBar {
-  background-color: #555555;
-  color: white;
-  position: relative;
-  height: 40px;
-  padding: 10px;
-  -webkit-box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.05);
-  box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.05);
-  z-index: 3; }
 
 .centered, #dragDrop, #dispImg {
   position: absolute;
@@ -39,15 +12,49 @@ canvas {
   -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%); }
 
+.appended {
+  margin-left: -50px;
+  margin-top: -50px; }
+
+.rotating {
+  animation-name: rotateLoop;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite; }
+
+@keyframes rotateLoop {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(-360deg); } }
+#imgInput {
+  width: 200px;
+  height: 200px;
+  visibility: hidden; }
+
+#loaderParent p {
+  font-family: "Lucida Console", Monaco, monospace;
+  color: white;
+  text-align: center;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  -ms-transform: translate(50%, 200%);
+  -webkit-transform: translate(50%, 200%);
+  -moz-transform: translate(50%, 200%);
+  transform: translate(50%, 200%); }
+
 #dragDrop {
   background-color: #555;
   width: 200px;
   height: 200px;
   border-radius: 30px;
   cursor: pointer;
+  display: table-cell;
+  vertical-align: bottom;
   -webkit-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
   -moz-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
-  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05); }
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
+  z-index: 3; }
 
 #dragDrop p {
   text-align: center;
@@ -68,21 +75,81 @@ canvas {
 #dispImg {
   visibility: hidden; }
 
+.optionBox {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 125px;
+  background-color: #555555;
+  font-family: "Lucida Console", Monaco, monospace;
+  z-index: 22;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; }
+
+.optionTable {
+  border-spacing: 20px; }
+
+.option {
+  width: 100px;
+  text-align: center;
+  position: relative;
+  color: white;
+  cursor: pointer; }
+
+.option p {
+  font-size: 11px; }
+
+.optionIcon {
+  width: 64px;
+  height: 64px; }
+
+.arrow {
+  position: absolute;
+  top: 8px;
+  -ms-transform: translate(50%, 0%);
+  -webkit-transform: translate(50%, 0%);
+  -moz-transform: translate(50%, 0%);
+  transform: translate(50%, 0%); }
+
+#bottomMenu {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px; }
+
+#topBar {
+  background-color: #555555;
+  color: white;
+  position: relative;
+  height: 40px;
+  padding: 10px;
+  -webkit-box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.05);
+  z-index: 5; }
+
 #actionButton {
   background-color: #555555;
   color: white;
   width: 60px;
   height: 60px;
   position: absolute;
-  right: 50px;
-  bottom: 50px;
+  right: 50%;
+  bottom: 95px;
   border-radius: 50%;
   font-family: "Courier New";
   font-size: 35pt;
   cursor: pointer;
   -webkit-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
   -moz-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
-  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05); }
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
+  -ms-transform: translate(50%, 0%);
+  -webkit-transform: translate(50%, 0%);
+  -moz-transform: translate(50%, 0%);
+  transform: translate(50%, 0%);
+  z-index: 2; }
 
 #actionButton i {
   position: absolute;
@@ -97,5 +164,20 @@ canvas {
   position: absolute;
   left: 16px;
   top: 3px; }
+
+* {
+  box-sizing: border-box; }
+
+p {
+  margin: 0px;
+  padding: 0px; }
+
+body {
+  margin: 0px;
+  overflow: hidden;
+  background-color: #494444; }
+
+canvas {
+  z-index: 1; }
 
 /*# sourceMappingURL=main.css.map */

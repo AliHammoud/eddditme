@@ -1,2 +1,29 @@
 @import 'partials/imageArea';
 @import 'partials/uiArea';
+
+* {
+
+  box-sizing: border-box;
+  
+}
+
+p {
+  
+  margin: 0px;
+  padding: 0px;
+  
+}
+
+body {
+
+  margin:  0px;
+  overflow: hidden;
+  background-color: #494444;
+
+}
+
+canvas {
+
+  z-index: 1;
+
+}

@@ -1,0 +1,132 @@
+$optionBoxHeight: 125px;
+$barHeight: 40px;
+$menuColour: #555555;
+
+.optionBox {
+
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+
+  height: $optionBoxHeight;
+
+  background-color: $menuColour;
+  //@include dropShadow-mixin(0px, -5px, 0.05);
+
+  font-family: "Lucida Console", Monaco, monospace;
+
+  z-index: 22;
+
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  
+}
+
+.optionTable {
+  
+  border-spacing: 20px;
+  
+}
+
+.option {
+  
+  width: 100px;
+  text-align: center;
+  position: relative;
+  
+  color: white;
+  
+  cursor: pointer
+  
+}
+
+.option p {
+  
+  font-size: 11px;
+  
+}
+
+.optionIcon {
+  
+  width: 64px;
+  height: 64px;
+  
+}
+
+.arrow {
+  
+  position: absolute;
+  top: 8px;
+  @include translate-mixin(50%, 0%);
+  
+}
+
+#bottomMenu {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+#topBar {
+
+  background-color: $menuColour;
+  color: white;
+
+  position: relative;
+  height:  $barHeight;
+  padding: 10px;
+
+  @include dropShadow-mixin(0px, 5px, 0.05);
+
+  z-index: 5;
+
+}
+
+#actionButton {
+
+  background-color: $menuColour;
+  color: white;
+
+  width:         60px;
+  height:        60px;
+
+  position: absolute;
+
+  right:         50%;
+  bottom:        95px;
+
+  border-radius: 50%;
+
+  font-family: "Courier New";
+  font-size:     35pt;
+
+  cursor: pointer;
+
+  @include dropShadow-mixin(5px, 5px, 0.05);
+  @include translate-mixin(50%, 0%);
+
+  z-index: 2;
+
+}
+
+#actionButton i {
+
+  position: absolute;
+
+  left: 30px;
+  top: 30px;
+
+  @include translate-mixin(-50%, -50%);
+
+}
+
+#addSign {
+
+  position: absolute;
+  left: 16px;
+  top: 3px;
+
+}

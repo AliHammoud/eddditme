@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="stylesheets/main.css">
     <link rel="icon" type="image/png" href="img/favicon.png">
     <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/easing.js"></script>
     <script src="scripts/three.min.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/ImageProcessor.js"></script>
@@ -39,7 +40,7 @@
     varying vec2 vUv;
 
     uniform sampler2D editImg;
-
+    
     void main(){
       vec4 myTexture = texture2D(editImg, vUv);
       gl_FragColor = vec4 (myTexture.r, 
@@ -51,22 +52,108 @@
 
     </script>
     
+    <script name="swap_channels"
+            id="fragmentShader_1"
+            type="x-shader/x-fragment" >
+
+    varying vec2 vUv;
+    uniform sampler2D editImg;
+    uniform float imageWidth;
+    uniform float imageHeight;
+
+    void main(){
+      vec4 myTexture = texture2D(editImg, vUv);
+      gl_FragColor = vec4 (myTexture.r, myTexture.b, myTexture.b, 1.0);
+
+    }
+
+    </script>
+    
     <div id="topBar">edddit.me</div>
-    <div class="container">
-      <div id="dragDrop">
-        <p>
-          <span>Drag &amp; Drop</span><br>
-          or click to upload
-        </p>
+    
+    <div id="dragDrop">
+      <p>
+        <span>Drag &amp; Drop</span><br>
+        or click to upload
+      </p>
+    </div>
+    <input type="file" id="imgInput">
+    
+    <div id="bottomMenu">
+      
+      <div id="actionButton">
+        <img src="img/up_arrow.png" class="arrow" width="30px" height="15px">
       </div>
-      <img src="" class="centered" id="dispImg" height="" width="0">
-      <input type="file" id="imgInput">
+
+      <div class="optionBox">
+
+        <table class="optionTable">
+
+          <tr>
+
+            <td>
+
+              <div class="option" id="op1">
+
+                <img src="img/placeholder_128.png" class="optionIcon">
+                <p>Swap Channels</p>
+
+              </div>
+
+            </td>
+
+            <td>
+
+              <div class="option" id="op2">
+
+                <img src="img/placeholder_128.png" class="optionIcon">
+                <p>Option #2</p>
+
+              </div>
+
+            </td>
+
+            <td>
+
+              <div class="option" id="op3">
+
+                <img src="img/placeholder_128.png" class="optionIcon">
+                <p>Option #3</p>
+
+              </div>
+
+            </td>
+
+            <td>
+
+              <div class="option" id="op4">
+
+                <img src="img/placeholder_128.png" class="optionIcon">
+                <p>Option #4</p>
+
+              </div>
+
+            </td>
+
+            <td>
+
+              <div class="option" id="op5">
+
+                <img src="img/placeholder_128.png" class="optionIcon">
+                <p>Option #5</p>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </table>
+
+      </div>
+      
     </div>
-    <div id="actionButton">
-      <i class="material-icons md-48">
-        edit
-      </i>
-    </div>
+    
   </body>
 
 </html>
