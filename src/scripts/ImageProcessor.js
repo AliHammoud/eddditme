@@ -11,9 +11,6 @@ var ImageProcessor = function (uploadedImg) {
     ASPECT    = uploadedImg.width / uploadedImg.height,
     NEAR      = 0.01,
     FAR       = 1000,
-    WIDTH     = 512,
-    HEIGHT    = 512,
-    DEBUGIMG  = true,
     OBJNAME   = 'imagePlane',
     UNIFS,
     VSHADER,
@@ -55,13 +52,7 @@ var ImageProcessor = function (uploadedImg) {
   
   function createImgPlane(fshaderID) {
     
-    var base64Image = IMAGE.src;
-    
-    TEXTURE = THREE.ImageUtils.loadTexture(
-      base64Image,
-      {},
-      function () { flush('Async texture loaded'); }
-    );
+    console.log('crimp');
     
     if (!isPowerOfTwo(IMAGE.height) && !isPowerOfTwo(IMAGE.width)) {
       
@@ -107,28 +98,48 @@ var ImageProcessor = function (uploadedImg) {
     CAMERA    = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);
     RENDERER  = new THREE.WebGLRenderer({ antialias: true });
     
-    RENDERER.setSize(IMAGE.width, IMAGE.height);
-    
-    if (DEBUGIMG) {
-      
-      document.body.appendChild(RENDERER.domElement);
-      
-    }
+    document.body.appendChild(RENDERER.domElement);
     
     CAMERA.position.z = 1;
+    
+    RENDERER.setSize(IMAGE.width, IMAGE.height);
     
   };
   
   ImageProcessor.prototype.loadShader = function (shaderID) {
     
+    var base64Image = IMAGE.src;
+    
+    var texLoader = new THREE.TextureLoader();
+    
+    
+    
+    console.log('proto');
+    
     if (SCENE.children.length === 0) {
-      
-      createImgPlane(shaderID);
+
+      texLoader.load(
+        base64Image,
+        function (texture) {
+
+          TEXTURE = texture;
+          createImgPlane(shaderID);
+
+        }
+      );
       
     } else {
       
       removeImagePlane();
-      createImgPlane(shaderID);
+      texLoader.load(
+        base64Image,
+        function (texture) {
+          
+          TEXTURE = texture;
+          createImgPlane(shaderID);
+
+        }
+      );
       
     }
     
@@ -142,7 +153,7 @@ var ImageProcessor = function (uploadedImg) {
     
     //console.log(w + ' ' + h);
     RENDERER.setSize(w, h);
-    flush('viepowrt resize');
+    flush('viewport resize');
     
   };
   

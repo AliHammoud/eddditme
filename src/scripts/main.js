@@ -7,7 +7,18 @@ maxlen: 80*/
 var
   img,
   viewport,
-  WARNINGS = false;
+  WARNINGS = false,
+    
+  anim_settings = '125px',
+  anim_bottomMenu = '-125px',
+    
+  duration_settings = 200,
+  duration_bottomMenu = 500,
+  
+  optionClicked = '',
+  settingOpen = '',
+    
+  hideAfter = true;
 
 function fitOrigSize(selector, imageWidth, imageHeight) {
 
@@ -193,8 +204,6 @@ function removeImage() {
 
 function createLoader() {
 
-  console.time('create loader');
-
   var loader = [
     '<div id="loaderParent">',
     '  <img src="img/loader.png"',
@@ -206,8 +215,6 @@ function createLoader() {
   ].join(' ');
 
   $('body').append(loader);
-  console.timeEnd('create loader');
-
 }
 
 function removeLoader() {
@@ -222,43 +229,31 @@ function readImageFile(file) {
     reader = new FileReader(),
     fileSizeRaw = file.size,
     fileSizeMB,
-    imageType = 'image';
+    fileType = 'image';
   
   fileSizeMB = fileSizeRaw / (1024 * 1024);
   
-  if (file.type.match(imageType)) {
+  if (file.type.match(fileType)) {
     
     createLoader();
     removeUploader();
     
     // write the image to the FileReader objcet as dataURL
     reader.readAsDataURL(file);
-    
-    reader.onloadstart = function (e) {
-
-      console.log('loading image');
-
-    };
-
-    reader.onprogress = function (e) {
-
-    };
 
     reader.onloadend = function (e) {
 
       console.log('image loaded');
-      removeLoader();
-
-    };
-
-    reader.onload = function (e) {
-
+      
       e.preventDefault();
-
+      
       img = new Image();
       img.src = reader.result;
 
+      //TODO: Tweak cross browser glitch
       setupImage();
+      
+      removeLoader();
 
     };
 
@@ -278,6 +273,59 @@ function upload(fileList) {
 
   }
 
+}
+
+function hideAll(selector) {
+
+  $.each(
+    $(selector),
+    function () {
+
+      $(selector).css('visibility', 'hidden');
+
+    }
+  );
+
+}
+
+function openDiv(selector, from, duration, type) {
+  
+  $(selector).removeClass('closed');
+  $(selector).animate(from, duration, type);
+  
+}
+
+function closeDiv(selector, to, dur, type, onComplete) {
+  
+  $(selector).addClass('closed');
+  $(selector).animate(
+    to,
+    {
+      duration: dur,
+      easing: type,
+      complete: onComplete
+    }
+  );
+  
+}
+
+function mapOptionToSetting(opID) {
+  
+  var indexRequested = opID.substr(2, 2);
+  var settingID = '#st' + indexRequested;
+  
+  return settingID;
+  
+}
+
+function onCloseSetting() {
+  
+  //$(settingOpen).css('visibility', 'hidden');
+  hideAll('.settingsBox');
+  
+  settingOpen = '';
+  optionClicked = '';
+  
 }
 
 $(document).ready(function () {
@@ -310,44 +358,132 @@ $(document).ready(function () {
     }
   );
   
-  $('#op1').click(
+  $('.option').click(
     function (e) {
       
-      try {
-        
-        viewport.loadShader('#fragmentShader_0');
-        
-      } catch (er) { alert(er); }
+      var whatClicked = $(this).attr('id');
       
-    }
-  );
-  
-  $('#op2').click(
-    function (e) {
-
-      try {
-
-        viewport.loadShader('#fragmentShader_1');
-
-      } catch (er) { alert(er); }
-
-    }
-  );
-  
-  $('#actionButton').click(
-    function (e) {
+      alert(settingOpen + " " + whatClicked);
       
-      if ($('#bottomMenu').hasClass('hidden')) {
+      var onCloseSpecial = function (e) {
         
-        $('#bottomMenu').removeClass('hidden');
-        $('#bottomMenu').animate({bottom: '0px'}, 500, 'easeInOutElastic');
+        onCloseSetting();
+        
+        settingOpen = mapOptionToSetting(whatClicked);
+        
+        $(settingOpen).css('visibility', 'visible');
+        
+        openDiv(
+          '.effectSettings',
+          {marginBottom: anim_settings},
+          duration_settings,
+          'easeInOutQuint'
+        );
+        
+      };
+      
+      if (settingOpen !== '') {
+        
+        closeDiv(
+          '.effectSettings',
+          {marginBottom: '0px'},
+          duration_settings,
+          'easeInOutQuint',
+          onCloseSpecial
+        );
+        
+      } else if (settingOpen === whatClicked) {
+        
+        closeDiv(
+          '.effectSettings',
+          {marginBottom: '0px'},
+          duration_settings,
+          'easeInOutQuint',
+          onCloseSetting
+        );
         
       } else {
         
-        $('#bottomMenu').addClass('hidden');
-        $('#bottomMenu').animate({bottom: '-125px'}, 500, 'easeInOutElastic');
+        settingOpen = mapOptionToSetting(whatClicked);
+        $(settingOpen).css('visibility', 'visible');
+
+        openDiv(
+          '.effectSettings',
+          {marginBottom: anim_settings},
+          duration_settings,
+          'easeInOutQuint'
+        );
         
       }
+      
+    }
+  );
+  
+  $('.menuButton').click(
+    function (e) {
+      
+      if ($('#bottomMenu').hasClass('closed')) {
+
+        openDiv(
+          '#bottomMenu',
+          {marginBottom: anim_settings},
+          duration_bottomMenu,
+          'easeInOutElastic'
+        );
+
+      } else {
+        
+        closeDiv(
+          '#bottomMenu',
+          {marginBottom: '0px'},
+          duration_bottomMenu,
+          'easeInOutElastic',
+          onCloseSetting
+        );
+        
+      }
+      
+      if (!$('.effectSettings').hasClass('closed')) {
+        
+        closeDiv(
+          '.effectSettings',
+          {marginBottom: '0px'},
+          duration_settings,
+          'easeInOutQuint'
+        );
+        
+      }
+      
+    }
+  );
+  
+  $('.confirm').click(
+    function () {
+      
+      closeDiv(
+        '.effectSettings',
+        {marginBottom: '0px'},
+        duration_settings,
+        'easeInOutQuint',
+        onCloseSetting
+      );
+      
+      //alert('effect applied!');
+      
+    }
+  );
+  
+  $('.cancel').click(
+    function () {
+
+      closeDiv(
+        '.effectSettings',
+        {marginBottom: '0px'},
+        duration_settings,
+        'easeInOutQuint',
+        onCloseSetting
+      );
+
     }
   );
 

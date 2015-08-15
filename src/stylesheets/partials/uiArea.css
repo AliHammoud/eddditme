@@ -8,12 +8,12 @@ Error: Undefined mixin 'translate-mixin'.
 59:   
 60:   position: absolute;
 61:   top: 8px;
-62:   @include translate-mixin(50%, 0%);
+62:   @include translate-mixin(-50%, 0%);
 63:   
 64: }
 65: 
-66: #bottomMenu {
-67:   position: absolute;
+66: .effectSettings {
+67:   position: relative;
 
 Backtrace:
 ./partials/uiArea.scss:62:in `translate-mixin'
@@ -71,4 +71,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'translate-mixin'.\A         on line 62 of ./partials/uiArea.scss, in `translate-mixin'\A         from line 62 of ./partials/uiArea.scss\A \A 57: \A 58: .arrow {\A 59:   \A 60:   position: absolute;\A 61:   top: 8px;\A 62:   @include translate-mixin(50%, 0%);\A 63:   \A 64: }\A 65: \A 66: #bottomMenu {\A 67:   position: absolute;"; }
+  content: "Error: Undefined mixin 'translate-mixin'.\A         on line 62 of ./partials/uiArea.scss, in `translate-mixin'\A         from line 62 of ./partials/uiArea.scss\A \A 57: \A 58: .arrow {\A 59:   \A 60:   position: absolute;\A 61:   top: 8px;\A 62:   @include translate-mixin(-50%, 0%);\A 63:   \A 64: }\A 65: \A 66: .effectSettings {\A 67:   position: relative;"; }

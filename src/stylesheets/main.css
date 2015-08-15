@@ -83,10 +83,10 @@
   height: 125px;
   background-color: #555555;
   font-family: "Lucida Console", Monaco, monospace;
-  z-index: 22;
   overflow-x: scroll;
   overflow-y: hidden;
-  -webkit-overflow-scrolling: touch; }
+  -webkit-overflow-scrolling: touch;
+  z-index: 22; }
 
 .optionTable {
   border-spacing: 20px; }
@@ -108,16 +108,89 @@
 .arrow {
   position: absolute;
   top: 8px;
+  -ms-transform: translate(-50%, 0%);
+  -webkit-transform: translate(-50%, 0%);
+  -moz-transform: translate(-50%, 0%);
+  transform: translate(-50%, 0%); }
+
+.effectSettings {
+  position: relative;
+  margin-bottom: 0px; }
+
+.settingsBox {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 125px;
+  background-color: #555555; }
+
+.settingsBox {
+  padding: 10px;
+  font-family: "Lucida Console", Monaco, monospace;
+  color: white; }
+
+.settingsBox #params {
+  margin-left: 20px;
+  margin-top: 35px;
+  display: flex; }
+
+.settingsBox #params * {
+  padding-left: 20px;
+  padding-right: 20px; }
+
+.actionButton {
+  background-color: #555555;
+  color: white;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  right: 50%;
+  bottom: 95px;
+  border-radius: 50%;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
   -ms-transform: translate(50%, 0%);
   -webkit-transform: translate(50%, 0%);
   -moz-transform: translate(50%, 0%);
-  transform: translate(50%, 0%); }
+  transform: translate(50%, 0%);
+  z-index: 2; }
+
+.actionButton p {
+  margin-top: 50%;
+  -ms-transform: translate(0%, -50%);
+  -webkit-transform: translate(0%, -50%);
+  -moz-transform: translate(0%, -50%);
+  transform: translate(0%, -50%); }
+
+.confirm {
+  right: 110px;
+  width: 40px;
+  height: 40px;
+  top: 55px;
+  border-style: solid;
+  border-width: 2px; }
+
+.cancel {
+  right: 50px;
+  width: 40px;
+  height: 40px;
+  top: 55px;
+  border-style: solid;
+  border-width: 2px; }
 
 #bottomMenu {
   position: absolute;
   left: 0px;
   right: 0px;
-  bottom: 0px; }
+  bottom: -125px;
+  z-index: 3000; }
 
 #topBar {
   background-color: #555555;
@@ -129,41 +202,6 @@
   -moz-box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.05);
   z-index: 5; }
-
-#actionButton {
-  background-color: #555555;
-  color: white;
-  width: 60px;
-  height: 60px;
-  position: absolute;
-  right: 50%;
-  bottom: 95px;
-  border-radius: 50%;
-  font-family: "Courier New";
-  font-size: 35pt;
-  cursor: pointer;
-  -webkit-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
-  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.05);
-  -ms-transform: translate(50%, 0%);
-  -webkit-transform: translate(50%, 0%);
-  -moz-transform: translate(50%, 0%);
-  transform: translate(50%, 0%);
-  z-index: 2; }
-
-#actionButton i {
-  position: absolute;
-  left: 30px;
-  top: 30px;
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%); }
-
-#addSign {
-  position: absolute;
-  left: 16px;
-  top: 3px; }
 
 * {
   box-sizing: border-box; }

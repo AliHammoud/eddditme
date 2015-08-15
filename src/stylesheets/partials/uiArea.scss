@@ -16,11 +16,11 @@ $menuColour: #555555;
 
   font-family: "Lucida Console", Monaco, monospace;
 
-  z-index: 22;
-
   overflow-x: scroll;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  
+  z-index: 22;
   
 }
 
@@ -59,33 +59,50 @@ $menuColour: #555555;
   
   position: absolute;
   top: 8px;
-  @include translate-mixin(50%, 0%);
+  @include translate-mixin(-50%, 0%);
   
 }
 
-#bottomMenu {
+.effectSettings {
+  position: relative;
+  margin-bottom: 0px;
+  
+}
+
+.settingsBox {
+
   position: absolute;
   left: 0px;
   right: 0px;
   bottom: 0px;
-}
-
-#topBar {
-
+  height: $optionBoxHeight;
+  
   background-color: $menuColour;
-  color: white;
-
-  position: relative;
-  height:  $barHeight;
-  padding: 10px;
-
-  @include dropShadow-mixin(0px, 5px, 0.05);
-
-  z-index: 5;
-
+  
 }
 
-#actionButton {
+.settingsBox {
+  
+  padding: 10px;
+  font-family: "Lucida Console", Monaco, monospace;
+  color: white;
+  
+}
+
+.settingsBox #params{
+  
+  margin-left: 20px;
+  margin-top:  35px;
+  display: flex;
+}
+
+.settingsBox #params *{
+
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.actionButton {
 
   background-color: $menuColour;
   color: white;
@@ -100,8 +117,11 @@ $menuColour: #555555;
 
   border-radius: 50%;
 
-  font-family: "Courier New";
-  font-size:     35pt;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size:     12px;
+  
+  text-align: center;
+  vertical-align: middle;
 
   cursor: pointer;
 
@@ -112,21 +132,57 @@ $menuColour: #555555;
 
 }
 
-#actionButton i {
-
-  position: absolute;
-
-  left: 30px;
-  top: 30px;
-
-  @include translate-mixin(-50%, -50%);
-
+.actionButton p {
+  
+  margin-top: 50%;
+  @include translate-mixin(0%, -50%);
+  
 }
 
-#addSign {
+.confirm {
+  
+  right: 110px;
+  width: 40px;
+  height: 40px;
+  top: 55px;
+  
+  border-style: solid;
+  border-width: 2px;
+  
+}
 
+.cancel {
+  
+  right: 50px;
+  width: 40px;
+  height: 40px;
+  top: 55px;
+  
+  border-style: solid;
+  border-width: 2px;
+  
+}
+
+#bottomMenu {
   position: absolute;
-  left: 16px;
-  top: 3px;
+  left: 0px;
+  right: 0px;
+  bottom: -125px;
+  
+  z-index: 3000;
+}
+
+#topBar {
+
+  background-color: $menuColour;
+  color: white;
+
+  position: relative;
+  height:  $barHeight;
+  padding: 10px;
+
+  @include dropShadow-mixin(0px, 5px, 0.05);
+
+  z-index: 5;
 
 }

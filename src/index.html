@@ -10,12 +10,6 @@
     <script src="scripts/main.js"></script>
     <script src="scripts/ImageProcessor.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet">
-  </head>
-
-
-  <body>
     
     <!-- Shaders -->
     <script id="vertexShader" 
@@ -40,7 +34,7 @@
     varying vec2 vUv;
 
     uniform sampler2D editImg;
-    
+
     void main(){
       vec4 myTexture = texture2D(editImg, vUv);
       gl_FragColor = vec4 (myTexture.r, 
@@ -51,7 +45,7 @@
     }
 
     </script>
-    
+
     <script name="swap_channels"
             id="fragmentShader_1"
             type="x-shader/x-fragment" >
@@ -69,6 +63,10 @@
 
     </script>
     
+  </head>
+
+  <body>
+    
     <div id="topBar">edddit.me</div>
     
     <div id="dragDrop">
@@ -79,14 +77,9 @@
     </div>
     <input type="file" id="imgInput">
     
-    <div id="bottomMenu">
+    <div id="bottomMenu" class="closed">
       
-      <div id="actionButton">
-        <img src="img/up_arrow.png" class="arrow" width="30px" height="15px">
-      </div>
-
       <div class="optionBox">
-
         <table class="optionTable">
 
           <tr>
@@ -96,7 +89,7 @@
               <div class="option" id="op1">
 
                 <img src="img/placeholder_128.png" class="optionIcon">
-                <p>Swap Channels</p>
+                <p>Revert Effects</p>
 
               </div>
 
@@ -107,7 +100,7 @@
               <div class="option" id="op2">
 
                 <img src="img/placeholder_128.png" class="optionIcon">
-                <p>Option #2</p>
+                <p>Swap Channels</p>
 
               </div>
 
@@ -149,7 +142,90 @@
           </tr>
 
         </table>
+      </div>
+      <div class="effectSettings closed">
+        
+        <div class="actionButton menuButton">
+          <img src="img/up_arrow.png" class="arrow" width="30px" height="15px">
+        </div>
+        
+        <div class="settingsBox" 
+             id="st1"
+             style="visibility: hidden">
 
+          <p>Undo Effects:</p><br>
+          
+          <p>[] Undo last</p>
+          <p>[] Reset image</p>
+
+          <div class="actionButton confirm">
+            <p>OK</p>
+          </div>
+
+          <div class="actionButton cancel">
+            <p>NO</p>
+          </div>
+
+        </div>
+        
+        <div class="settingsBox" 
+         id="st2"
+         style="visibility: hidden">
+          
+          <p>Configure filter:</p>
+          
+          <div id="params">
+            
+            <p>Swap</p>
+            
+            <select>
+              <option value="1">Red</option>
+              <option value="2">Green</option>
+              <option value="3">Blue</option>
+            </select>
+
+            <p>with</p>
+
+            <select>
+              <option value="1">Red</option>
+              <option value="2" selected>Green</option>
+              <option value="3">Blue</option>
+            </select>
+            
+          </div>
+          
+          <div class="actionButton confirm">
+            <p>OK</p>
+          </div>
+
+          <div class="actionButton cancel">
+            <p>NO</p>
+          </div>
+          
+        </div>
+        
+        <div class="settingsBox" 
+             id="st3"
+             style="visibility: hidden">
+
+          <p>Configure filter:</p>
+
+          <div id="params">
+            
+            Something else
+
+          </div>
+
+          <div class="actionButton confirm">
+            <p>OK</p>
+          </div>
+
+          <div class="actionButton cancel">
+            <p>NO</p>
+          </div>
+
+        </div>
+        
       </div>
       
     </div>
